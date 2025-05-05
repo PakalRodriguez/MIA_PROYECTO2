@@ -13,15 +13,25 @@ export default function Explorer({newIp="localhost"}){
 
     useEffect(() => {
         fetch(`http://${newIp}:8080/explorer`)
-          .then(response => response.json())
-          .then(rawData => {
-            console.log(rawData);
-            setArchivos(rawData);
+          .then(response => response.text())
+          .then(text => {
+            console.log("Texto recibido del backend:", text);
+    
+            // Validar si contiene el prefijo esperado
+            if (text.includes("PARTICIONES MONTADAS:")) {
+              const rawList = text.split(":")[1].trim(); // "871A, 871B"
+              const ids = rawList.length > 0 ? rawList.split(",").map(id => id.trim()) : [];
+              setArchivos(ids);
+            } else {
+              setArchivos([]);
+            }
           })
           .catch(error => {
             console.error('Error en la solicitud Fetch:', error);
+            alert("⚠️ No se pudo conectar con el backend o la respuesta fue inválida.");
           });
-      }, []);
+    }, []);
+    
 
     const onClick = (archivo) => {
         console.log("buscar",archivo)
