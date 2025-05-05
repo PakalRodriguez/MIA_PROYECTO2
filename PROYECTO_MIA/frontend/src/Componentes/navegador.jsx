@@ -69,7 +69,7 @@ export default function Navegador(){
                     {/*Fila 1 (titulo del proyecto, RESPALDO)*/}
                     <div className="container-fluid">
                         <a className="navbar-brand" type="submit" >
-                            ARCHIVOS PROYECTO 2            
+                            ARCHIVOSss          
                         </a>
                         {/*Cada bloque div aqui dentro es una nueva fila hacia abajo*/}
                         {/*Fila 2 (menus)*/}
